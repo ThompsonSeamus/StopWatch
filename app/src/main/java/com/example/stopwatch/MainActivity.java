@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView timeText;
     Button startButton, resetButton;
+    Boolean started;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,13 +25,15 @@ public class MainActivity extends AppCompatActivity {
         timeText = findViewById(R.id.timeText);
         startButton = findViewById(R.id.startButton);
         resetButton = findViewById(R.id.ResetButton);
+        started = false;
 
         //onClickListeners
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //update UI thread (I think)
-                startButton.setText(R.string.real_stop);
+                if(!started){startButton.setText(R.string.real_stop);}
+                else{startButton.setText(R.string.start);}
 
                 //Executive services
                 ExecutorService service = Executors.newSingleThreadExecutor();
@@ -39,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         int milSecond = 100;
                         int second = milSecond/1000;
-                        
+
 
                     }
                 });
